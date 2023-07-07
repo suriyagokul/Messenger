@@ -1,0 +1,11 @@
+mkdir realtime-chat-app
+
+cd realtime-chat-app
+
+Using vite for creating react-app template
+
+	npm create vite@latest .
+
+npm install
+
+npm run dev
