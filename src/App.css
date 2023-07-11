@@ -2,3 +2,11 @@
   margin: 0;
   font-family: "Poppins";
 }
+
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.owner {
+  flex-direction: row-reverse;
+}

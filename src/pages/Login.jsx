@@ -1,12 +1,33 @@
 import React from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+
+    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      navigate("/home");
+    });
+  };
+
   return (
     <main className="flex flex-col md:items-center md:justify-center ml-10 h-[100vh] md:ml-0">
       <div className="flex flex-col items-center justify-center shadow-md bg-white rounded-md max-w-[70vw] px-10 py-4 mt-20 md:mt-0 md:px-20 md:py-5">
         <h4 className="text-3xl mb-3">Chatter</h4>
         <h4 className="text-sm mb-10">Login</h4>
-        <form action="" className="flex flex-col items-center justify-center">
+        <form
+          action=""
+          className="flex flex-col items-center justify-center"
+          onSubmit={handleLogin}
+        >
           <input
             type="email"
             name=""
@@ -30,7 +51,9 @@ const Login = () => {
           </button>
           <p className="text-xs">
             You don't have an account?{" "}
-            <span className="text-purple-400 cursor-pointer">Register</span>
+            <Link className="text-purple-400 cursor-pointer" to="/register">
+              Register
+            </Link>
           </p>
         </form>
       </div>
