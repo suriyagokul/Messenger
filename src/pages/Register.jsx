@@ -6,6 +6,7 @@ import { auth, storage, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [file, setFile] = useState("");
   const [err, setErr] = useState(false);
 
   const navigate = useNavigate();
@@ -109,7 +110,12 @@ const Register = () => {
             placeholder="password"
             required
           />
-          <input className="hidden" type="file" id="file" />
+          <input
+            className="hidden"
+            type="file"
+            id="file"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
           <label
             htmlFor="file"
             className="m-4 flex items-center cursor-pointer"
@@ -122,6 +128,7 @@ const Register = () => {
             />
             <p>choose file</p>
           </label>
+          {file && <p>Chosen: {file.name}</p>}
           <button
             type="submit"
             className="m-4 bg-purple-400 px-4 py-1 rounded-md text-white hover:text-black hover:bg-purple-500"
