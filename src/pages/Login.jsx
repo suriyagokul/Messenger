@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 const Login = () => {
+  const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -11,11 +12,17 @@ const Login = () => {
     const email = e.target[0].value;
     const password = e.target[1].value;
 
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      navigate("/home");
-    });
+    try {
+      signInWithEmailAndPassword(auth, email, password).then(
+        (userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/");
+        }
+      );
+    } catch (error) {
+      setErr(true);
+    }
   };
 
   return (
@@ -49,6 +56,8 @@ const Login = () => {
           >
             Sign In
           </button>
+          {err && <span className="text-red-500">Something went wrong</span>}
+
           <p className="text-xs">
             You don't have an account?{" "}
             <Link className="text-purple-400 cursor-pointer" to="/register">
