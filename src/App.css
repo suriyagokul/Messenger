@@ -10,3 +10,7 @@ textarea::-webkit-scrollbar {
 .owner {
   flex-direction: row-reverse;
 }
+
+.notowner {
+  flex-direction: row;
+}
