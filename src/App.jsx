@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import ResetPassword from "./pages/ResetPassword";
 import "./App.css";
 import { authContext } from "./context/AuthContext";
 
@@ -34,6 +35,7 @@ function App() {
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="resetpassword" element={<ResetPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>

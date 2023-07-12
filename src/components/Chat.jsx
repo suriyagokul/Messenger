@@ -15,7 +15,7 @@ const Chat = () => {
     <div className="flex flex-col w-[60%] lg:w-[70%]  h-[80vh] rounded-md bg-purple-100">
       <nav className=" w-[100%] py-[14px] px-3 md:px-10 bg-[#282e38]">
         <div className="flex justify-between items-center">
-          <div className="flex items-center ">
+          <div className="flex items-center cursor-pointer">
             <img
               src={data?.user.photoURL}
               className="w-10 h-10 rounded-full mr-2"

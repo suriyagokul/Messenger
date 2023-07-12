@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, storage, db } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { auth, storage, db } from "../firebase";
 
 const Register = () => {
   const [file, setFile] = useState("");
   const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -67,7 +69,11 @@ const Register = () => {
 
           await setDoc(doc(db, "userChats", user.uid), {});
 
-          navigate("/");
+          toast.success("Congrats 🎉 Registered Successfully!");
+
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
 
           console.log("File available at", downloadURL);
         });
@@ -79,6 +85,7 @@ const Register = () => {
 
   return (
     <main className="flex flex-col md:items-center md:justify-center ml-10 h-[100vh] md:ml-0">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex flex-col items-center justify-center shadow-md bg-white rounded-md max-w-[70vw] px-10 py-4 mt-20 md:mt-0 md:px-20 md:py-5">
         <h4 className="text-3xl mb-3">Chatter</h4>
         <h4 className="text-sm mb-10">Register</h4>
